@@ -5,13 +5,13 @@
 #include <QMessageBox>
 #include <QDebug>
 
+void EditTask::setUserName(const QString &name, const QString &username) {
+    pname = name;
+    pusername = username;
+}
+
 EditTask::EditTask(QWidget *parent) : QDialog(parent), ui(new Ui::EditTask) {
     ui->setupUi(this);
-    LoginWindow login;
-    if (!login.connOpen())
-        ui->connectionMessageLabel->setText("Not Connected to DB !!");
-    else
-        ui->connectionMessageLabel->setText("Connected to DB !!");
 
     // Set up table widget
     ui->ViewTaskTableWidget->setColumnCount(6);
@@ -22,7 +22,7 @@ EditTask::EditTask(QWidget *parent) : QDialog(parent), ui(new Ui::EditTask) {
     layout->addWidget(ui->ViewTaskTableWidget);
     setLayout(layout);
 
-    fetchData();
+    fetchData(pusername);
 
     connect(ui->ViewTaskTableWidget, &QTableWidget::cellChanged, this, &EditTask::cellChanged);
 }
@@ -39,19 +39,17 @@ void EditTask::on_BackButton_clicked() {
     mainpage.exec();
 }
 
-void EditTask::setUserName(const QString &name, const QString &username) {
-    pname = name;
-    pusername = username;
-}
 
-void EditTask::fetchData() {
+void EditTask::fetchData(const QString &username) {
     LoginWindow login;
     if (!login.connOpen()) {
         qDebug() << "Failed to open the Database";
         return;
     }
+
     QSqlQuery query;
-    query.prepare("SELECT taskId, taskName, taskDescription, taskDate, name, username FROM tasks");
+    query.prepare("SELECT taskId, taskName, taskDescription, taskDate, name, username FROM tasks WHERE username = :username");
+    query.bindValue(":username", username);
     if (!query.exec()) {
         QMessageBox::critical(this, tr("ERROR"), query.lastError().text());
         return;

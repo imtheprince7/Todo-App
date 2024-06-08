@@ -1,0 +1,45 @@
+""""""""""""" Sqlite3 Information """"""""""""""
+
+CREATE TABLE user_registration (
+	name TEXT NOT NULL,
+	username TEXT PRIMARY KEY,
+	email TEXT NOT NULL UNIQUE,
+	phone TEXT NOT NULL UNIQUE,
+	password TEXT NOT NULL
+);
+
+CREATE TABLE tasks(
+	taskId INTEGER PRIMARY KEY AUTOINCREMENT,
+	taskName TEXT NOT NULL,
+	taskDescription TEXT NOT NULL,
+	taskDate TEXT NOT NULL,
+	name TEXT NOT NULL,
+	username TEXT NOT NULL
+);
+
+
+
+
+insert into user_registration(name, username, email, phone,password, confirmPassword) VALUES('Prince Kumar','princeks777','coolpk@gmail.com',8744920777,'princeks777', 'princeks777');
+
+ select * from users;
+Prince Kumar|princeks777|coolpk@gmail.com|8744920777|princeks777|princeks777
+
+?????????????    Command to perform tasks    ???????????????????????
+1.  open CMD and Enter  sqlite3
+
+'''''''''''''''''  Commanad to create  DB: """"""""""""""
+
+2.  move the path where you db_Placed
+	 sqlite3 tododb.db 
+
+3. check DB is available or not
+	.databases
+
+4. To check tables name in available DB
+	.tables
+
+5. TO check the schema of Table
+	.schema "table_name"
+
+6. To check the values from tables.

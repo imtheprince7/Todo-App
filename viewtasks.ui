@@ -46,30 +46,6 @@
     <string>View Tasks</string>
    </property>
   </widget>
-  <widget class="QLabel" name="connectionMessageLabel">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>670</y>
-     <width>150</width>
-     <height>16</height>
-    </rect>
-   </property>
-   <property name="maximumSize">
-    <size>
-     <width>150</width>
-     <height>50</height>
-    </size>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string>[+]</string>
-   </property>
-  </widget>
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>

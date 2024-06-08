@@ -29,7 +29,6 @@ public:
     QLabel *DateLabel;
     QDateEdit *datepicker;
     QPushButton *AddTaskButton;
-    QLabel *connectionMessageLabel;
     QLineEdit *TaskNameLineEdit;
     QLineEdit *DescriptionLineEdit;
     QLabel *successfullMessageLabel;
@@ -87,32 +86,27 @@ public:
         AddTaskButton->setGeometry(QRect(250, 490, 150, 70));
         AddTaskButton->setMaximumSize(QSize(150, 70));
         AddTaskButton->setFont(font);
-        connectionMessageLabel = new QLabel(AddTask);
-        connectionMessageLabel->setObjectName("connectionMessageLabel");
-        connectionMessageLabel->setGeometry(QRect(0, 550, 200, 20));
-        connectionMessageLabel->setMaximumSize(QSize(200, 20));
-        QFont font3;
-        font3.setPointSize(11);
-        connectionMessageLabel->setFont(font3);
         TaskNameLineEdit = new QLineEdit(AddTask);
         TaskNameLineEdit->setObjectName("TaskNameLineEdit");
         TaskNameLineEdit->setGeometry(QRect(90, 150, 400, 60));
         TaskNameLineEdit->setMaximumSize(QSize(400, 60));
-        QFont font4;
-        font4.setPointSize(13);
-        font4.setBold(true);
-        font4.setItalic(true);
-        TaskNameLineEdit->setFont(font4);
+        QFont font3;
+        font3.setPointSize(13);
+        font3.setBold(true);
+        font3.setItalic(true);
+        TaskNameLineEdit->setFont(font3);
         DescriptionLineEdit = new QLineEdit(AddTask);
         DescriptionLineEdit->setObjectName("DescriptionLineEdit");
         DescriptionLineEdit->setGeometry(QRect(90, 260, 400, 150));
         DescriptionLineEdit->setMaximumSize(QSize(400, 150));
-        DescriptionLineEdit->setFont(font4);
+        DescriptionLineEdit->setFont(font3);
         successfullMessageLabel = new QLabel(AddTask);
         successfullMessageLabel->setObjectName("successfullMessageLabel");
         successfullMessageLabel->setGeometry(QRect(40, 110, 400, 25));
         successfullMessageLabel->setMaximumSize(QSize(400, 25));
-        successfullMessageLabel->setFont(font3);
+        QFont font4;
+        font4.setPointSize(11);
+        successfullMessageLabel->setFont(font4);
 
         retranslateUi(AddTask);
 
@@ -128,7 +122,6 @@ public:
         taskNameLabel->setText(QCoreApplication::translate("AddTask", "Task Name", nullptr));
         DateLabel->setText(QCoreApplication::translate("AddTask", "Date:", nullptr));
         AddTaskButton->setText(QCoreApplication::translate("AddTask", "Add Task", nullptr));
-        connectionMessageLabel->setText(QCoreApplication::translate("AddTask", "[+]", nullptr));
         successfullMessageLabel->setText(QString());
     } // retranslateUi
 

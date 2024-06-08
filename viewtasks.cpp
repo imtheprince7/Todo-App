@@ -5,15 +5,16 @@
 #include <QVBoxLayout>
 #include <QDebug>
 
+
+void ViewTasks::setUserName(const QString &name, const QString &username) {
+    pname = name;
+    pusername = username;
+}
+
 ViewTasks::ViewTasks(QWidget *parent) : QDialog(parent), ui(new Ui::ViewTasks){
     ui->setupUi(this);
-    LoginWindow login;
-    if (!login.connOpen())
-        ui->connectionMessageLabel->setText("Not Connected to DB !!");
-    else
-        ui->connectionMessageLabel->setText("Connected to DB !!");
 
-    // Set up table widget
+ // Set up table widget
     ui->ViewTaskTableWidget->setColumnCount(6);
     ui->ViewTaskTableWidget->setHorizontalHeaderLabels({"SNo.", "Task Name", "Task Description", "Task Date", "Person Name", "Username"});
 
@@ -22,7 +23,7 @@ ViewTasks::ViewTasks(QWidget *parent) : QDialog(parent), ui(new Ui::ViewTasks){
     layout->addWidget(ui->ViewTaskTableWidget);
     setLayout(layout);
 
-    fetchData();
+    fetchData(pusername);
 }
 
 ViewTasks::~ViewTasks(){
@@ -31,27 +32,22 @@ ViewTasks::~ViewTasks(){
 void ViewTasks::on_pushButton_clicked(){
     this->close();
     MainPage mainpage;
-    mainpage.setUserName(pname, username);
+    mainpage.setUserName(pname, pusername);
     mainpage.setModal(true);
     mainpage.exec();
 
 }
 
-void ViewTasks::setUserName(const QString &name, const QString &usrname) {
-    pname = name;
-    username = usrname;
-}
-
-void ViewTasks::fetchData() {
+void ViewTasks::fetchData(const QString &username) {
     LoginWindow login;
     if (!login.connOpen()) {
         qDebug() << "Failed to open the Database";
         return;
     }
-    QSqlQuery query;
-    query.prepare("SELECT taskId, taskName, taskDescription, taskDate, name, username FROM tasks");
-    // query.bindValue(":pname", pname);
 
+    QSqlQuery query;
+    query.prepare("SELECT taskId, taskName, taskDescription, taskDate, name, username FROM tasks WHERE username = :username");
+    query.bindValue(":username", username);
     if (!query.exec()) {
         QMessageBox::critical(this, tr("ERROR"), query.lastError().text());
         return;

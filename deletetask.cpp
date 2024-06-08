@@ -7,6 +7,11 @@
 
 const int COLUMN_COUNT = 6;
 
+void DeleteTask::setUserName(const QString &name, const QString &username) {
+    pname = name;
+    pusername = username;
+}
+
 DeleteTask::DeleteTask(QWidget *parent) : QDialog(parent), ui(new Ui::DeleteTask) {
     ui->setupUi(this);
     ui->ViewTaskTableWidget->setColumnCount(COLUMN_COUNT);
@@ -17,18 +22,12 @@ DeleteTask::DeleteTask(QWidget *parent) : QDialog(parent), ui(new Ui::DeleteTask
     layout->addWidget(ui->ViewTaskTableWidget);
     setLayout(layout);
 
-    fetchData();
-
+    fetchData(pusername);
     connect(ui->ViewTaskTableWidget, &QTableWidget::cellClicked, this, &DeleteTask::confirmDelete);
 }
 
 DeleteTask::~DeleteTask() {
     delete ui;
-}
-
-void DeleteTask::setUserName(const QString &name, const QString &username) {
-    pname = name;
-    pusername = username;
 }
 
 void DeleteTask::on_BackButton_clicked() {
@@ -39,7 +38,7 @@ void DeleteTask::on_BackButton_clicked() {
     mainpage.exec();
 }
 
-void DeleteTask::fetchData() {
+void DeleteTask::fetchData(const QString &username) {
     LoginWindow login;
     if (!login.connOpen()) {
         qDebug() << "Failed to open the Database";
@@ -47,9 +46,8 @@ void DeleteTask::fetchData() {
     }
 
     QSqlQuery query;
-    query.prepare("SELECT taskId, taskName, taskDescription, taskDate, name, username FROM tasks");
-    // WHERE username = :pusername");
-    // query.bindValue(":pusername", pusername);
+    query.prepare("SELECT taskId, taskName, taskDescription, taskDate, name, username FROM tasks WHERE username = :username");
+    query.bindValue(":username", username);
 
     if (!query.exec()) {
         QMessageBox::critical(this, tr("ERROR"), query.lastError().text());

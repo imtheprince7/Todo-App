@@ -40,9 +40,8 @@ public:
 
 private slots:
     void on_LoginButton_clicked();
-
+    QString getHashedPassword(const QString &password);
     void on_RegisterButton_clicked();
-
     void on_ForgetPasswordButton_clicked();
 
 private:

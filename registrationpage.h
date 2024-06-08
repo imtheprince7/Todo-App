@@ -20,6 +20,7 @@ public:
 private slots:
     void on_RegisterButton_clicked();
      void on_BackButton_clicked();
+    QString getHashedPassword(const QString &password);
 
 private:
     Ui::RegistrationPage *ui;

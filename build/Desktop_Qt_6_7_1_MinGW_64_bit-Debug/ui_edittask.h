@@ -24,7 +24,6 @@ class Ui_EditTask
 public:
     QLabel *EditTaskMessageLabel;
     QPushButton *BackButton;
-    QLabel *connectionMessageLabel;
     QTableWidget *ViewTaskTableWidget;
 
     void setupUi(QDialog *EditTask)
@@ -52,20 +51,13 @@ public:
         font1.setBold(true);
         font1.setItalic(true);
         BackButton->setFont(font1);
-        connectionMessageLabel = new QLabel(EditTask);
-        connectionMessageLabel->setObjectName("connectionMessageLabel");
-        connectionMessageLabel->setGeometry(QRect(20, 670, 200, 21));
-        connectionMessageLabel->setMaximumSize(QSize(200, 50));
-        QFont font2;
-        font2.setPointSize(11);
-        connectionMessageLabel->setFont(font2);
         ViewTaskTableWidget = new QTableWidget(EditTask);
         ViewTaskTableWidget->setObjectName("ViewTaskTableWidget");
         ViewTaskTableWidget->setGeometry(QRect(20, 110, 1050, 560));
         ViewTaskTableWidget->setMaximumSize(QSize(1050, 560));
-        QFont font3;
-        font3.setPointSize(12);
-        ViewTaskTableWidget->setFont(font3);
+        QFont font2;
+        font2.setPointSize(12);
+        ViewTaskTableWidget->setFont(font2);
 
         retranslateUi(EditTask);
 
@@ -77,7 +69,6 @@ public:
         EditTask->setWindowTitle(QCoreApplication::translate("EditTask", "Dialog", nullptr));
         EditTaskMessageLabel->setText(QCoreApplication::translate("EditTask", "Edit your tasks", nullptr));
         BackButton->setText(QCoreApplication::translate("EditTask", "Back", nullptr));
-        connectionMessageLabel->setText(QCoreApplication::translate("EditTask", "[+]", nullptr));
     } // retranslateUi
 
 };

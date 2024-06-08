@@ -38,6 +38,8 @@ constexpr auto qt_meta_stringdata_CLASSLoginWindowENDCLASS = QtMocHelpers::strin
     "LoginWindow",
     "on_LoginButton_clicked",
     "",
+    "getHashedPassword",
+    "password",
     "on_RegisterButton_clicked",
     "on_ForgetPasswordButton_clicked"
 );
@@ -52,7 +54,7 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSLoginWindowENDCLASS[] = {
       12,       // revision
        0,       // classname
        0,    0, // classinfo
-       3,   14, // methods
+       4,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -60,12 +62,14 @@ Q_CONSTINIT static const uint qt_meta_data_CLASSLoginWindowENDCLASS[] = {
        0,       // signalCount
 
  // slots: name, argc, parameters, tag, flags, initial metatype offsets
-       1,    0,   32,    2, 0x08,    1 /* Private */,
-       3,    0,   33,    2, 0x08,    2 /* Private */,
-       4,    0,   34,    2, 0x08,    3 /* Private */,
+       1,    0,   38,    2, 0x08,    1 /* Private */,
+       3,    1,   39,    2, 0x08,    2 /* Private */,
+       5,    0,   42,    2, 0x08,    4 /* Private */,
+       6,    0,   43,    2, 0x08,    5 /* Private */,
 
  // slots: parameters
     QMetaType::Void,
+    QMetaType::QString, QMetaType::QString,    4,
     QMetaType::Void,
     QMetaType::Void,
 
@@ -83,6 +87,9 @@ Q_CONSTINIT const QMetaObject LoginWindow::staticMetaObject = { {
         QtPrivate::TypeAndForceComplete<LoginWindow, std::true_type>,
         // method 'on_LoginButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
+        // method 'getHashedPassword'
+        QtPrivate::TypeAndForceComplete<QString, std::false_type>,
+        QtPrivate::TypeAndForceComplete<const QString &, std::false_type>,
         // method 'on_RegisterButton_clicked'
         QtPrivate::TypeAndForceComplete<void, std::false_type>,
         // method 'on_ForgetPasswordButton_clicked'
@@ -98,12 +105,13 @@ void LoginWindow::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id,
         (void)_t;
         switch (_id) {
         case 0: _t->on_LoginButton_clicked(); break;
-        case 1: _t->on_RegisterButton_clicked(); break;
-        case 2: _t->on_ForgetPasswordButton_clicked(); break;
+        case 1: { QString _r = _t->getHashedPassword((*reinterpret_cast< std::add_pointer_t<QString>>(_a[1])));
+            if (_a[0]) *reinterpret_cast< QString*>(_a[0]) = std::move(_r); }  break;
+        case 2: _t->on_RegisterButton_clicked(); break;
+        case 3: _t->on_ForgetPasswordButton_clicked(); break;
         default: ;
         }
     }
-    (void)_a;
 }
 
 const QMetaObject *LoginWindow::metaObject() const
@@ -125,13 +133,13 @@ int LoginWindow::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 3)
+        if (_id < 4)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 3;
+        _id -= 4;
     } else if (_c == QMetaObject::RegisterMethodArgumentMetaType) {
-        if (_id < 3)
+        if (_id < 4)
             *reinterpret_cast<QMetaType *>(_a[0]) = QMetaType();
-        _id -= 3;
+        _id -= 4;
     }
     return _id;
 }

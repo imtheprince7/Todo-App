@@ -2,11 +2,7 @@
 #define EDITTASK_H
 
 #include <QDialog>
-#include <QSqlDatabase>
-#include <QSqlQuery>
-#include <QMessageBox>
-#include <QVBoxLayout>
-#include "loginwindow.h"
+#include <QtSql/QSqlDatabase>
 
 namespace Ui {
 class EditTask;
@@ -19,18 +15,18 @@ public:
     explicit EditTask(QWidget *parent = nullptr);
     ~EditTask();
     void setUserName(const QString &name, const QString &username);
+    void fetchData(const QString &username);
 
 private slots:
     void on_BackButton_clicked();
-    void fetchData();
-    void populateTableWidget(QSqlQuery &query);
     void cellChanged(int row, int column);
+    void clearSelection();
 
 private:
     Ui::EditTask *ui;
     QString pname;
     QString pusername;
-    void clearSelection();
+    void populateTableWidget(QSqlQuery &query);
 };
 
 #endif // EDITTASK_H

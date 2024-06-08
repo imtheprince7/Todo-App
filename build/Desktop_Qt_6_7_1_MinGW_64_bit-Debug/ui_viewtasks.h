@@ -23,7 +23,6 @@ class Ui_ViewTasks
 {
 public:
     QLabel *ViewTaskMessageLabel;
-    QLabel *connectionMessageLabel;
     QPushButton *pushButton;
     QTableWidget *ViewTaskTableWidget;
 
@@ -43,31 +42,24 @@ public:
         font.setItalic(true);
         font.setUnderline(true);
         ViewTaskMessageLabel->setFont(font);
-        connectionMessageLabel = new QLabel(ViewTasks);
-        connectionMessageLabel->setObjectName("connectionMessageLabel");
-        connectionMessageLabel->setGeometry(QRect(10, 670, 150, 16));
-        connectionMessageLabel->setMaximumSize(QSize(150, 50));
-        QFont font1;
-        font1.setPointSize(11);
-        connectionMessageLabel->setFont(font1);
         pushButton = new QPushButton(ViewTasks);
         pushButton->setObjectName("pushButton");
         pushButton->setGeometry(QRect(930, 10, 150, 61));
         pushButton->setMaximumSize(QSize(150, 70));
-        QFont font2;
-        font2.setPointSize(18);
-        font2.setBold(true);
-        font2.setItalic(true);
-        pushButton->setFont(font2);
+        QFont font1;
+        font1.setPointSize(18);
+        font1.setBold(true);
+        font1.setItalic(true);
+        pushButton->setFont(font1);
         ViewTaskTableWidget = new QTableWidget(ViewTasks);
         ViewTaskTableWidget->setObjectName("ViewTaskTableWidget");
         ViewTaskTableWidget->setGeometry(QRect(30, 150, 1050, 520));
         ViewTaskTableWidget->setMaximumSize(QSize(1050, 520));
-        QFont font3;
-        font3.setPointSize(12);
-        font3.setBold(true);
-        font3.setItalic(true);
-        ViewTaskTableWidget->setFont(font3);
+        QFont font2;
+        font2.setPointSize(12);
+        font2.setBold(true);
+        font2.setItalic(true);
+        ViewTaskTableWidget->setFont(font2);
 
         retranslateUi(ViewTasks);
 
@@ -78,7 +70,6 @@ public:
     {
         ViewTasks->setWindowTitle(QCoreApplication::translate("ViewTasks", "Dialog", nullptr));
         ViewTaskMessageLabel->setText(QCoreApplication::translate("ViewTasks", "View Tasks", nullptr));
-        connectionMessageLabel->setText(QCoreApplication::translate("ViewTasks", "[+]", nullptr));
         pushButton->setText(QCoreApplication::translate("ViewTasks", "BACK", nullptr));
     } // retranslateUi
 

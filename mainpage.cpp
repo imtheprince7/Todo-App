@@ -16,15 +16,15 @@ MainPage::~MainPage() {
 }
 
 void MainPage::setUserName(const QString &name, const QString &username) {
-    ui->UsernameTextField->setText(name);
-    pname = name;  // Store the name
-    pusername = username;  // Store the username
+    ui->UsernameTextField->setText(username);
+    pname = name;
+    pusername = username;
 }
 
 // Logout Button Logic
 void MainPage::on_logoutButton_clicked() {
     this->hide();
-    LoginWindow *loginWindow = new LoginWindow();  // Create a new instance of LoginWindow
+    LoginWindow *loginWindow = new LoginWindow();
     loginWindow->show();
 }
 
@@ -32,7 +32,7 @@ void MainPage::on_logoutButton_clicked() {
 void MainPage::on_AddTasksButton_clicked() {
     this->hide();
     AddTask addtasks;
-    addtasks.setUserName(pname, pusername);  // Pass the stored name and username
+    addtasks.setUserName(pname, pusername);
     addtasks.setModal(true);
     addtasks.exec();
     this->show();
@@ -42,7 +42,8 @@ void MainPage::on_AddTasksButton_clicked() {
 void MainPage::on_ViewTaskButton_clicked() {
     this->hide();
     ViewTasks viewtask;
-    viewtask.setUserName(pname, pusername);  // Pass the stored name and username
+    viewtask.setUserName(pname, pusername);
+    viewtask.fetchData(pusername);
     viewtask.setModal(true);
     viewtask.exec();
     this->show();
@@ -52,7 +53,8 @@ void MainPage::on_ViewTaskButton_clicked() {
 void MainPage::on_deleteTasksButton_clicked() {
     this->hide();
     DeleteTask deletetask;
-    deletetask.setUserName(pname, pusername);  // Pass the stored name and username
+    deletetask.setUserName(pname, pusername);
+    deletetask.fetchData(pusername);
     deletetask.setModal(true);
     deletetask.exec();
     this->show();
@@ -62,7 +64,8 @@ void MainPage::on_deleteTasksButton_clicked() {
 void MainPage::on_EditTaskButton_clicked() {
     this->hide();
     EditTask editask;
-    editask.setUserName(pname, pusername);  // Pass the stored name and username
+    editask.setUserName(pname, pusername);
+    editask.fetchData(pusername);
     editask.setModal(true);
     editask.exec();
     this->show();

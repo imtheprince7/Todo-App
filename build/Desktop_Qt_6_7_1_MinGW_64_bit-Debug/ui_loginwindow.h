@@ -31,7 +31,6 @@ public:
     QPushButton *LoginButton;
     QPushButton *RegisterButton;
     QPushButton *ForgetPasswordButton;
-    QLabel *connectionMessageLabel;
     QLineEdit *lineEditUsername;
     QLineEdit *lineEditPassword;
     QLabel *ErrorMessageLabel;
@@ -89,10 +88,6 @@ public:
         ForgetPasswordButton->setGeometry(QRect(430, 440, 250, 60));
         ForgetPasswordButton->setMaximumSize(QSize(250, 60));
         ForgetPasswordButton->setFont(font2);
-        connectionMessageLabel = new QLabel(centralwidget);
-        connectionMessageLabel->setObjectName("connectionMessageLabel");
-        connectionMessageLabel->setGeometry(QRect(10, 470, 100, 20));
-        connectionMessageLabel->setMaximumSize(QSize(100, 20));
         lineEditUsername = new QLineEdit(centralwidget);
         lineEditUsername->setObjectName("lineEditUsername");
         lineEditUsername->setGeometry(QRect(350, 130, 250, 50));
@@ -136,7 +131,6 @@ public:
         LoginButton->setText(QCoreApplication::translate("LoginWindow", "Login", nullptr));
         RegisterButton->setText(QCoreApplication::translate("LoginWindow", "Register", nullptr));
         ForgetPasswordButton->setText(QCoreApplication::translate("LoginWindow", "Forget Password ?", nullptr));
-        connectionMessageLabel->setText(QCoreApplication::translate("LoginWindow", "[+] connection", nullptr));
         ErrorMessageLabel->setText(QString());
     } // retranslateUi
 

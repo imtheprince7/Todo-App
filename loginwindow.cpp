@@ -6,35 +6,42 @@
 #include <QSqlQuery>
 #include <QSqlError>
 #include <QDebug>
+#include <QCryptographicHash>
 
-
-LoginWindow::LoginWindow(QWidget *parent) : QMainWindow(parent) , ui(new Ui::LoginWindow) {
+LoginWindow::LoginWindow(QWidget *parent) : QMainWindow(parent), ui(new Ui::LoginWindow) {
     ui->setupUi(this);
-    if (!connOpen())
-        ui->connectionMessageLabel->setText("Not Connected to DB !!");
-    else
-        ui->connectionMessageLabel->setText("Connected to DB !!");
 }
 
-LoginWindow::~LoginWindow(){
+LoginWindow::~LoginWindow() {
     connClose();
     delete ui;
 }
 
-// To get the name from Users table and send that name in MainPage Window
+QString LoginWindow::getHashedPassword(const QString &password) {
+    // Hash password using SHA-256 algorithm
+    QByteArray hash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
+    return QString(hash.toHex());
+}
+
 QString LoginWindow::getUserName(const QString &username, const QString &password) {
     QString name;
     QSqlQuery query;
-
-    query.prepare("SELECT name FROM user_registration WHERE username = :username AND password = :password");
+    query.prepare("SELECT name, password FROM user_registration WHERE username = :username");
     query.bindValue(":username", username);
-    query.bindValue(":password", password);
 
     if (query.exec()) {
         if (query.next()) {
-            name = query.value(0).toString();
+            QString storedPassword = query.value(1).toString();
+            QString hashedPassword = getHashedPassword(password);
+            qDebug() << "Stored Password:" << storedPassword;
+            qDebug() << "Hashed Password:" << hashedPassword;
+            if (storedPassword == hashedPassword) {
+                name = query.value(0).toString();
+            } else {
+                qDebug() << "Password mismatch";
+            }
         } else {
-            qDebug() << "No user found with the provided credentials";
+            qDebug() << "No user found with the provided username";
         }
     } else {
         qDebug() << "Query execution error: " << query.lastError();
@@ -57,7 +64,7 @@ void LoginWindow::on_LoginButton_clicked() {
     if (!name.isEmpty()) {
         this->hide();
         MainPage mainpage;
-        mainpage.setUserName(name,username);
+        mainpage.setUserName(name, username);
         mainpage.setModal(true);
         mainpage.exec();
 
@@ -69,19 +76,15 @@ void LoginWindow::on_LoginButton_clicked() {
     }
 }
 
-void LoginWindow::on_RegisterButton_clicked(){
+void LoginWindow::on_RegisterButton_clicked() {
     this->hide();
     RegistrationPage registerpage;
     registerpage.setModal(true);
     registerpage.exec();
-
 }
 
-
-void LoginWindow::on_ForgetPasswordButton_clicked(){
+void LoginWindow::on_ForgetPasswordButton_clicked() {
     InformationRetrieve informationRetrieve;
     informationRetrieve.setModal(true);
     informationRetrieve.exec();
-
 }
-

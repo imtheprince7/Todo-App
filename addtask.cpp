@@ -8,12 +8,6 @@
 
 AddTask::AddTask(QWidget *parent) : QDialog(parent), ui(new Ui::AddTask){
     ui->setupUi(this);
-
-    LoginWindow login;
-    if (!login.connOpen())
-        ui->connectionMessageLabel->setText("Not Connected to DB !!");
-    else
-        ui->connectionMessageLabel->setText("Connected to DB !!");
 }
 
 AddTask::~AddTask() {
@@ -41,7 +35,7 @@ void AddTask::on_AddTaskButton_clicked() {
     QString personName = pname;
     QString personUsername = pusername;
 
-    if (taskName.isEmpty() || taskDescription.isEmpty() || taskDate.isEmpty() || personName.isEmpty() || personUsername.isEmpty()) {  // Check if pname and pusername are also filled
+    if (taskName.isEmpty() || taskDescription.isEmpty() || taskDate.isEmpty() || personName.isEmpty() || personUsername.isEmpty()) {
         QMessageBox::warning(this, tr("Input Error"), tr("Please fill all fields."));
         return;
     }
@@ -56,8 +50,8 @@ void AddTask::on_AddTaskButton_clicked() {
     query.bindValue(":taskName", taskName);
     query.bindValue(":taskDescription", taskDescription);
     query.bindValue(":taskDate", taskDate);
-    query.bindValue(":personName", personName);  // Correct binding key
-    query.bindValue(":personUsername", personUsername);  // Correct binding key
+    query.bindValue(":personName", personName);
+    query.bindValue(":personUsername", personUsername);
 
     if (query.exec()) {
         QMessageBox::information(this, tr("SAVE"), tr("Your task has been saved successfully!"));

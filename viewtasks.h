@@ -15,6 +15,7 @@ public:
     explicit ViewTasks(QWidget *parent = nullptr);
     ~ViewTasks();
     void setUserName(const QString &name, const QString &username);
+    void fetchData(const QString &pusername);
 
 private slots:
     void on_pushButton_clicked();
@@ -22,9 +23,8 @@ private slots:
 private:
     Ui::ViewTasks *ui;
     QString pname;
-    QString username;
+    QString pusername;
 
-    void fetchData();
     void populateTableWidget(QSqlQuery &query);
 
 };

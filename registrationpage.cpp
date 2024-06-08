@@ -1,18 +1,13 @@
 #include "registrationpage.h"
 #include "ui_registrationpage.h"
-#include "loginwindow.h"
 #include <QSqlQuery>
 #include <QSqlError>
-#include <QMessageBox>
 #include <QDebug>
+#include <QCryptographicHash>
+#include <QMessageBox>
 
 RegistrationPage::RegistrationPage(QWidget *parent) : QDialog(parent) , ui(new Ui::RegistrationPage){
     ui->setupUi(this);
-    LoginWindow login;
-    if (!login.connOpen())
-        qDebug() << "Not Connected to DB !!";
-    else
-        qDebug() << "Connected to DB !!";
 }
 
 RegistrationPage::~RegistrationPage(){
@@ -22,10 +17,14 @@ RegistrationPage::~RegistrationPage(){
 
 void RegistrationPage::on_BackButton_clicked(){
     this->hide();
-    LoginWindow *loginWindow = new LoginWindow();  // Create a new instance of LoginWindow
+    LoginWindow *loginWindow = new LoginWindow();
     loginWindow->show();
 }
-
+QString RegistrationPage::getHashedPassword(const QString &password) {
+    // Hash password using SHA-256 algorithm
+    QByteArray hash = QCryptographicHash::hash(password.toUtf8(), QCryptographicHash::Sha256);
+    return QString(hash.toHex());
+}
 
 void RegistrationPage::on_RegisterButton_clicked(){
     LoginWindow login;
@@ -52,6 +51,7 @@ void RegistrationPage::on_RegisterButton_clicked(){
         return;
     }
 
+    QString hashedPassword = getHashedPassword(password);
 
     QSqlQuery query;
     query.prepare("INSERT INTO user_registration (name, username, email, phone, password ) VALUES (:name, :username, :email, :phone, :password)");
@@ -59,7 +59,7 @@ void RegistrationPage::on_RegisterButton_clicked(){
     query.bindValue(":username", username);
     query.bindValue(":email", email);
     query.bindValue(":phone", phone);
-    query.bindValue(":password", password);
+    query.bindValue(":password", hashedPassword);
 
     if (query.exec()) {
         QMessageBox::information(this, "Registration Success", "You have been registered successfully!");

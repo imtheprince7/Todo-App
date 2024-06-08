@@ -177,25 +177,6 @@
      <string>Forget Password ?</string>
     </property>
    </widget>
-   <widget class="QLabel" name="connectionMessageLabel">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>470</y>
-      <width>100</width>
-      <height>20</height>
-     </rect>
-    </property>
-    <property name="maximumSize">
-     <size>
-      <width>100</width>
-      <height>20</height>
-     </size>
-    </property>
-    <property name="text">
-     <string>[+] connection</string>
-    </property>
-   </widget>
    <widget class="QLineEdit" name="lineEditUsername">
     <property name="geometry">
      <rect>

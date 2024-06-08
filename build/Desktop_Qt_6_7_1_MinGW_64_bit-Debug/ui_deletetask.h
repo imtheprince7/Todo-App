@@ -24,7 +24,6 @@ class Ui_DeleteTask
 public:
     QLabel *DeleteTaskMessageLabel;
     QPushButton *BackButton;
-    QLabel *connectionMessageLabel;
     QTableWidget *ViewTaskTableWidget;
 
     void setupUi(QDialog *DeleteTask)
@@ -52,20 +51,13 @@ public:
         font1.setBold(true);
         font1.setItalic(true);
         BackButton->setFont(font1);
-        connectionMessageLabel = new QLabel(DeleteTask);
-        connectionMessageLabel->setObjectName("connectionMessageLabel");
-        connectionMessageLabel->setGeometry(QRect(10, 670, 63, 20));
-        connectionMessageLabel->setMaximumSize(QSize(200, 20));
-        QFont font2;
-        font2.setPointSize(11);
-        connectionMessageLabel->setFont(font2);
         ViewTaskTableWidget = new QTableWidget(DeleteTask);
         ViewTaskTableWidget->setObjectName("ViewTaskTableWidget");
         ViewTaskTableWidget->setGeometry(QRect(20, 110, 1050, 560));
         ViewTaskTableWidget->setMaximumSize(QSize(1050, 560));
-        QFont font3;
-        font3.setPointSize(12);
-        ViewTaskTableWidget->setFont(font3);
+        QFont font2;
+        font2.setPointSize(12);
+        ViewTaskTableWidget->setFont(font2);
 
         retranslateUi(DeleteTask);
 
@@ -77,7 +69,6 @@ public:
         DeleteTask->setWindowTitle(QCoreApplication::translate("DeleteTask", "Dialog", nullptr));
         DeleteTaskMessageLabel->setText(QCoreApplication::translate("DeleteTask", "Delete your tasks", nullptr));
         BackButton->setText(QCoreApplication::translate("DeleteTask", "Back", nullptr));
-        connectionMessageLabel->setText(QCoreApplication::translate("DeleteTask", "[+]", nullptr));
     } // retranslateUi
 
 };
