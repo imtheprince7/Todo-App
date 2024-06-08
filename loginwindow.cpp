@@ -26,7 +26,7 @@ QString LoginWindow::getUserName(const QString &username, const QString &passwor
     QString name;
     QSqlQuery query;
 
-    query.prepare("SELECT name FROM users WHERE username = :username AND password = :password");
+    query.prepare("SELECT name FROM user_registration WHERE username = :username AND password = :password");
     query.bindValue(":username", username);
     query.bindValue(":password", password);
 
@@ -57,7 +57,7 @@ void LoginWindow::on_LoginButton_clicked() {
     if (!name.isEmpty()) {
         this->hide();
         MainPage mainpage;
-        mainpage.setUserName(name);
+        mainpage.setUserName(name,username);
         mainpage.setModal(true);
         mainpage.exec();
 

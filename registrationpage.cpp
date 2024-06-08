@@ -29,10 +29,10 @@ void RegistrationPage::on_BackButton_clicked(){
 
 void RegistrationPage::on_RegisterButton_clicked(){
     LoginWindow login;
-    QString name = ui->NameTextField->toPlainText();
-    QString username = ui->UsernameTextField->toPlainText();
-    QString email = ui->EmailIdTextField->toPlainText();
-    QString phone = ui->MobileNumberTextField->toPlainText();
+    QString name = ui->NameTextField->text();
+    QString username = ui->UsernameTextField->text();
+    QString email = ui->EmailIdTextField->text();
+    QString phone = ui->MobileNumberTextField->text();
     QString password = ui->PasswordLineEdit->text();
     QString confirmPassword = ui->ConfirmPasswordLineEdit->text();
 
@@ -54,13 +54,12 @@ void RegistrationPage::on_RegisterButton_clicked(){
 
 
     QSqlQuery query;
-    query.prepare("INSERT INTO users (name, username, email, phone, password, confirmPassword ) VALUES (:name, :username, :email, :phone, :password, :confirmPassword)");
+    query.prepare("INSERT INTO user_registration (name, username, email, phone, password ) VALUES (:name, :username, :email, :phone, :password)");
     query.bindValue(":name", name);
     query.bindValue(":username", username);
     query.bindValue(":email", email);
     query.bindValue(":phone", phone);
     query.bindValue(":password", password);
-    query.bindValue(":confirmPassword", confirmPassword);
 
     if (query.exec()) {
         QMessageBox::information(this, "Registration Success", "You have been registered successfully!");

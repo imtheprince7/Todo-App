@@ -20,7 +20,7 @@ class MainPage : public QDialog
 public:
     explicit MainPage(QWidget *parent = nullptr);
     ~MainPage();
-    void setUserName(const QString &name);
+    void setUserName(const QString &name, const QString &username);
 
 private slots:
 
@@ -31,11 +31,10 @@ private slots:
     void on_deleteTasksButton_clicked();
     void on_MarkCompleteTaskButton_clicked();
 
-
-
-
 private:
     Ui::MainPage *ui;
+    QString pname;
+    QString pusername;
 };
 
 #endif // MAINPAGE_H

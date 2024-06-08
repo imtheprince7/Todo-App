@@ -4,9 +4,6 @@
 #include <QTranslator>
 #include "globals.h"
 
-LoginWindow login;
-
-
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
@@ -20,6 +17,7 @@ int main(int argc, char *argv[])
             break;
         }
     }
+
     LoginWindow w;
     w.show();
     return a.exec();

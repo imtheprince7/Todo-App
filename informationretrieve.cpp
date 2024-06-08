@@ -66,6 +66,8 @@ void InformationRetrieve::on_SearchButton_clicked() {
     login.connClose();
 }
 
+
+
 void InformationRetrieve::on_UpdateButton_clicked() {
     LoginWindow login;
     QString username = ui->UsernameTextField->toPlainText();
@@ -88,7 +90,7 @@ void InformationRetrieve::on_UpdateButton_clicked() {
     }
 
     QSqlQuery query;
-    query.prepare("UPDATE users SET password = :password WHERE username = :username");
+    query.prepare("UPDATE user_registration SET password = :password WHERE username = :username");
     query.bindValue(":username", username);
     query.bindValue(":password", password);
 

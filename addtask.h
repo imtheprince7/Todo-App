@@ -2,6 +2,7 @@
 #define ADDTASK_H
 
 #include <QDialog>
+#include <QtSql>
 #include"mainpage.h"
 #include "loginwindow.h"
 
@@ -16,6 +17,7 @@ class AddTask : public QDialog
 public:
     explicit AddTask(QWidget *parent = nullptr);
     ~AddTask();
+    void setUserName(const QString &name, const QString &username);
 
 private slots:
     void on_BackButton_clicked();
@@ -23,6 +25,8 @@ private slots:
 
 private:
     Ui::AddTask *ui;
+    QString pname;
+    QString pusername;
 };
 
 #endif // ADDTASK_H

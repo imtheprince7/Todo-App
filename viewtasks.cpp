@@ -1,11 +1,11 @@
 #include "viewtasks.h"
 #include "ui_viewtasks.h"
 #include "mainpage.h"
-
 #include <QMessageBox>
+#include <QVBoxLayout>
+#include <QDebug>
 
-
-ViewTasks::ViewTasks(QWidget *parent) : QDialog(parent) , ui(new Ui::ViewTasks){
+ViewTasks::ViewTasks(QWidget *parent) : QDialog(parent), ui(new Ui::ViewTasks){
     ui->setupUi(this);
     LoginWindow login;
     if (!login.connOpen())
@@ -14,24 +14,32 @@ ViewTasks::ViewTasks(QWidget *parent) : QDialog(parent) , ui(new Ui::ViewTasks){
         ui->connectionMessageLabel->setText("Connected to DB !!");
 
     // Set up table widget
-    ui->ViewTaskTableWidget->setColumnCount(4);
-    ui->ViewTaskTableWidget->setHorizontalHeaderLabels({"SNo.", "Task Name", "Description", "Date"});
+    ui->ViewTaskTableWidget->setColumnCount(6);
+    ui->ViewTaskTableWidget->setHorizontalHeaderLabels({"SNo.", "Task Name", "Task Description", "Task Date", "Person Name", "Username"});
 
-    // Fetch data from the database and populate the table widget
+    ui->ViewTaskTableWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
+    QVBoxLayout *layout = new QVBoxLayout(this);
+    layout->addWidget(ui->ViewTaskTableWidget);
+    setLayout(layout);
+
     fetchData();
 }
-
 
 ViewTasks::~ViewTasks(){
     delete ui;
 }
-
 void ViewTasks::on_pushButton_clicked(){
     this->close();
     MainPage mainpage;
+    mainpage.setUserName(pname, username);
     mainpage.setModal(true);
     mainpage.exec();
 
+}
+
+void ViewTasks::setUserName(const QString &name, const QString &usrname) {
+    pname = name;
+    username = usrname;
 }
 
 void ViewTasks::fetchData() {
@@ -40,37 +48,32 @@ void ViewTasks::fetchData() {
         qDebug() << "Failed to open the Database";
         return;
     }
-
     QSqlQuery query;
-    query.prepare("SELECT taskId, taskName, description, date FROM addtasks");
+    query.prepare("SELECT taskId, taskName, taskDescription, taskDate, name, username FROM tasks");
+    // query.bindValue(":pname", pname);
 
     if (!query.exec()) {
         QMessageBox::critical(this, tr("ERROR"), query.lastError().text());
         return;
     }
-    // Populate the table widget with fetched data
-    populateTableWidget();
+    populateTableWidget(query);
     login.close();
 }
-
-void ViewTasks::populateTableWidget() {
-     LoginWindow login;
-    QSqlQuery query;
-    query.prepare("SELECT taskId, taskName, description, date FROM addtasks");
+void ViewTasks::populateTableWidget(QSqlQuery &query) {
     if (query.exec()) {
         int row = 0;
         while (query.next()) {
             ui->ViewTaskTableWidget->insertRow(row);
-            ui->ViewTaskTableWidget->setItem(row, 0, new QTableWidgetItem(query.value(0).toString()));
-            ui->ViewTaskTableWidget->setItem(row, 1, new QTableWidgetItem(query.value(1).toString()));
-            ui->ViewTaskTableWidget->setItem(row, 2, new QTableWidgetItem(query.value(2).toString()));
-            ui->ViewTaskTableWidget->setItem(row, 3, new QTableWidgetItem(query.value(3).toString()));
+            for (int col = 0; col < 6; ++col) {
+                ui->ViewTaskTableWidget->setItem(row, col, new QTableWidgetItem(query.value(col).toString()));
+            }
             row++;
         }
-    }else {
+    } else {
         QMessageBox::critical(this, tr("ERROR"), query.lastError().text());
     }
-    login.connClose();
-}
 
+    ui->ViewTaskTableWidget->resizeColumnsToContents();
+    ui->ViewTaskTableWidget->horizontalHeader()->setSectionResizeMode(2, QHeaderView::Stretch);
+}
 

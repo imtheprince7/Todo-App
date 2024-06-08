@@ -6,13 +6,13 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>900</width>
-    <height>689</height>
+    <width>1100</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="maximumSize">
    <size>
-    <width>900</width>
+    <width>1100</width>
     <height>700</height>
    </size>
   </property>
@@ -22,10 +22,10 @@
   <widget class="QLabel" name="ViewTaskMessageLabel">
    <property name="geometry">
     <rect>
-     <x>40</x>
-     <y>40</y>
+     <x>20</x>
+     <y>10</y>
      <width>201</width>
-     <height>70</height>
+     <height>51</height>
     </rect>
    </property>
    <property name="maximumSize">
@@ -39,6 +39,7 @@
      <pointsize>22</pointsize>
      <italic>true</italic>
      <bold>true</bold>
+     <underline>true</underline>
     </font>
    </property>
    <property name="text">
@@ -48,8 +49,8 @@
   <widget class="QLabel" name="connectionMessageLabel">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>660</y>
+     <x>10</x>
+     <y>670</y>
      <width>150</width>
      <height>16</height>
     </rect>
@@ -72,7 +73,7 @@
   <widget class="QPushButton" name="pushButton">
    <property name="geometry">
     <rect>
-     <x>750</x>
+     <x>930</x>
      <y>10</y>
      <width>150</width>
      <height>61</height>
@@ -98,17 +99,24 @@
   <widget class="QTableWidget" name="ViewTaskTableWidget">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>120</y>
-     <width>750</width>
-     <height>500</height>
+     <x>30</x>
+     <y>150</y>
+     <width>1050</width>
+     <height>520</height>
     </rect>
    </property>
    <property name="maximumSize">
     <size>
-     <width>750</width>
-     <height>500</height>
+     <width>1050</width>
+     <height>520</height>
     </size>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>12</pointsize>
+     <italic>true</italic>
+     <bold>true</bold>
+    </font>
    </property>
   </widget>
  </widget>

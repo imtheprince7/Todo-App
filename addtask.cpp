@@ -6,8 +6,7 @@
 #include <QSqlError>
 #include <QDebug>
 
-
-AddTask::AddTask(QWidget *parent) : QDialog(parent) , ui(new Ui::AddTask){
+AddTask::AddTask(QWidget *parent) : QDialog(parent), ui(new Ui::AddTask){
     ui->setupUi(this);
 
     LoginWindow login;
@@ -21,10 +20,15 @@ AddTask::~AddTask() {
     delete ui;
 }
 
+void AddTask::setUserName(const QString &name, const QString &username) {
+    pname = name;
+    pusername = username;
+}
 
 void AddTask::on_BackButton_clicked() {
     this->close();
     MainPage mainpage;
+    mainpage.setUserName(pname, pusername);
     mainpage.setModal(true);
     mainpage.exec();
 }
@@ -32,10 +36,12 @@ void AddTask::on_BackButton_clicked() {
 void AddTask::on_AddTaskButton_clicked() {
     LoginWindow login;
     QString taskName = ui->TaskNameLineEdit->text();
-    QString description = ui->DescriptionLineEdit->text();
-    QString date = ui->datepicker->text();
+    QString taskDescription = ui->DescriptionLineEdit->text();
+    QString taskDate = ui->datepicker->text();
+    QString personName = pname;
+    QString personUsername = pusername;
 
-    if (taskName.isEmpty() || description.isEmpty() || date.isEmpty()) {
+    if (taskName.isEmpty() || taskDescription.isEmpty() || taskDate.isEmpty() || personName.isEmpty() || personUsername.isEmpty()) {  // Check if pname and pusername are also filled
         QMessageBox::warning(this, tr("Input Error"), tr("Please fill all fields."));
         return;
     }
@@ -46,10 +52,12 @@ void AddTask::on_AddTaskButton_clicked() {
     }
 
     QSqlQuery query;
-    query.prepare("INSERT INTO addtasks (taskName, description, date) VALUES (:taskName, :description, :date)");
+    query.prepare("INSERT INTO tasks (taskName, taskDescription, taskDate, name, username) VALUES (:taskName, :taskDescription, :taskDate, :personName, :personUsername)");
     query.bindValue(":taskName", taskName);
-    query.bindValue(":description", description);
-    query.bindValue(":date", date);
+    query.bindValue(":taskDescription", taskDescription);
+    query.bindValue(":taskDate", taskDate);
+    query.bindValue(":personName", personName);  // Correct binding key
+    query.bindValue(":personUsername", personUsername);  // Correct binding key
 
     if (query.exec()) {
         QMessageBox::information(this, tr("SAVE"), tr("Your task has been saved successfully!"));
