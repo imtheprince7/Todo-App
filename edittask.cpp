@@ -5,10 +5,6 @@
 #include <QMessageBox>
 #include <QDebug>
 
-void EditTask::setUserName(const QString &name, const QString &username) {
-    pname = name;
-    pusername = username;
-}
 
 EditTask::EditTask(QWidget *parent) : QDialog(parent), ui(new Ui::EditTask) {
     ui->setupUi(this);
@@ -16,19 +12,23 @@ EditTask::EditTask(QWidget *parent) : QDialog(parent), ui(new Ui::EditTask) {
     // Set up table widget
     ui->ViewTaskTableWidget->setColumnCount(6);
     ui->ViewTaskTableWidget->setHorizontalHeaderLabels({"SNo.", "Task Name", "Task Description", "Task Date", "Person Name", "Username"});
-
     ui->ViewTaskTableWidget->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Expanding);
     QVBoxLayout *layout = new QVBoxLayout(this);
     layout->addWidget(ui->ViewTaskTableWidget);
     setLayout(layout);
 
-    fetchData(pusername);
-
+ // Connect signals for cell change
     connect(ui->ViewTaskTableWidget, &QTableWidget::cellChanged, this, &EditTask::cellChanged);
 }
 
 EditTask::~EditTask() {
     delete ui;
+}
+
+void EditTask::setUserName(const QString &name, const QString &username) {
+    pname = name;
+    pusername = username;
+    fetchData(pusername);
 }
 
 void EditTask::on_BackButton_clicked() {
@@ -38,7 +38,6 @@ void EditTask::on_BackButton_clicked() {
     mainpage.setModal(true);
     mainpage.exec();
 }
-
 
 void EditTask::fetchData(const QString &username) {
     LoginWindow login;

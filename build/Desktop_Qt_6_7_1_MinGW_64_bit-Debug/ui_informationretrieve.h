@@ -15,7 +15,6 @@
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QTextBrowser>
 
 QT_BEGIN_NAMESPACE
 
@@ -28,15 +27,15 @@ public:
     QLabel *label;
     QLabel *label_2;
     QPushButton *SearchButton;
-    QTextBrowser *UsernameTextField;
-    QTextBrowser *EmailIdTextField;
-    QTextBrowser *UsernameTextField_2;
     QLabel *label_3;
     QLabel *label_4;
     QLabel *label_5;
     QPushButton *UpdateButton;
     QLineEdit *PasswordLineEdit;
     QLineEdit *ConfirmPasswordLineEdit;
+    QLineEdit *UsernameLineEdit;
+    QLineEdit *UsernameFirstLineEdit;
+    QLineEdit *EmailIdLineEdit;
 
     void setupUi(QDialog *InformationRetrieve)
     {
@@ -87,29 +86,6 @@ public:
         SearchButton->setGeometry(QRect(820, 180, 171, 61));
         SearchButton->setMaximumSize(QSize(180, 70));
         SearchButton->setFont(font1);
-        UsernameTextField = new QTextBrowser(InformationRetrieve);
-        UsernameTextField->setObjectName("UsernameTextField");
-        UsernameTextField->setGeometry(QRect(360, 110, 300, 50));
-        UsernameTextField->setMaximumSize(QSize(300, 50));
-        QFont font3;
-        font3.setPointSize(13);
-        font3.setBold(true);
-        font3.setItalic(true);
-        UsernameTextField->setFont(font3);
-        EmailIdTextField = new QTextBrowser(InformationRetrieve);
-        EmailIdTextField->setObjectName("EmailIdTextField");
-        EmailIdTextField->setGeometry(QRect(360, 200, 300, 50));
-        EmailIdTextField->setMaximumSize(QSize(300, 50));
-        EmailIdTextField->setFont(font3);
-        UsernameTextField_2 = new QTextBrowser(InformationRetrieve);
-        UsernameTextField_2->setObjectName("UsernameTextField_2");
-        UsernameTextField_2->setGeometry(QRect(380, 450, 291, 50));
-        UsernameTextField_2->setMaximumSize(QSize(300, 50));
-        QFont font4;
-        font4.setPointSize(13);
-        font4.setBold(false);
-        font4.setItalic(false);
-        UsernameTextField_2->setFont(font4);
         label_3 = new QLabel(InformationRetrieve);
         label_3->setObjectName("label_3");
         label_3->setGeometry(QRect(140, 530, 131, 51));
@@ -134,6 +110,10 @@ public:
         PasswordLineEdit->setObjectName("PasswordLineEdit");
         PasswordLineEdit->setGeometry(QRect(380, 540, 300, 50));
         PasswordLineEdit->setMaximumSize(QSize(300, 50));
+        QFont font3;
+        font3.setPointSize(13);
+        font3.setBold(true);
+        font3.setItalic(true);
         PasswordLineEdit->setFont(font3);
         PasswordLineEdit->setEchoMode(QLineEdit::Password);
         ConfirmPasswordLineEdit = new QLineEdit(InformationRetrieve);
@@ -142,6 +122,24 @@ public:
         ConfirmPasswordLineEdit->setMaximumSize(QSize(300, 50));
         ConfirmPasswordLineEdit->setFont(font3);
         ConfirmPasswordLineEdit->setEchoMode(QLineEdit::Password);
+        UsernameLineEdit = new QLineEdit(InformationRetrieve);
+        UsernameLineEdit->setObjectName("UsernameLineEdit");
+        UsernameLineEdit->setGeometry(QRect(380, 450, 300, 50));
+        UsernameLineEdit->setMaximumSize(QSize(300, 50));
+        UsernameLineEdit->setFont(font3);
+        UsernameLineEdit->setEchoMode(QLineEdit::Normal);
+        UsernameFirstLineEdit = new QLineEdit(InformationRetrieve);
+        UsernameFirstLineEdit->setObjectName("UsernameFirstLineEdit");
+        UsernameFirstLineEdit->setGeometry(QRect(370, 130, 300, 50));
+        UsernameFirstLineEdit->setMaximumSize(QSize(300, 50));
+        UsernameFirstLineEdit->setFont(font3);
+        UsernameFirstLineEdit->setEchoMode(QLineEdit::Normal);
+        EmailIdLineEdit = new QLineEdit(InformationRetrieve);
+        EmailIdLineEdit->setObjectName("EmailIdLineEdit");
+        EmailIdLineEdit->setGeometry(QRect(370, 220, 300, 50));
+        EmailIdLineEdit->setMaximumSize(QSize(300, 50));
+        EmailIdLineEdit->setFont(font3);
+        EmailIdLineEdit->setEchoMode(QLineEdit::Normal);
 
         retranslateUi(InformationRetrieve);
 
