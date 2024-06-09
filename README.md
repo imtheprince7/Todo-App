@@ -2,7 +2,7 @@
 
 An advanced C++ application developed with Qt and MySQL for task organization and tracking. The application ensures secure user authentication, efficient task categorization, and progress tracking, enhancing productivity by 40% for over 100+ users.
 <br><br>
-<b> Features </b>
+# Features
 <br>
 → Secure User Authentication  <br>
 → Add Task  <br>
@@ -18,7 +18,7 @@ An advanced C++ application developed with Qt and MySQL for task organization an
 # Usage
 
 This application offers a user-friendly GUI for interacting with the task management system. Users can select from various options to add, update, search, display, or delete tasks, as well as categorize tasks and track their progress. The backend is powered by MySQL, ensuring smooth and efficient data management.
-<br><b>Each user's tasks are securely stored and only accessible during their active session, with access to other users' tasks being restricted.</b>
+<br><b>→  Each user's tasks are securely stored and only accessible during their active session, with access to other users' tasks being restricted.</b>
 <br>
 # Implementation
 <br>
