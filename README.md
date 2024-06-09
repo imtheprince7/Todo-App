@@ -4,4 +4,6 @@ Developed a Task Management application in C++, Qt, and MySQL for task organizat
 
 
 <br>
-<img src="TaskManagementApplication.mp4">
+<img src="first.gif">
+<img src="second.gif">
+<img src="third.gif">
