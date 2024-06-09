@@ -5,8 +5,14 @@ Developed a Task Management application in C++, Qt, and MySQL for task organizat
 <b>
   → Each user's saved tasks are only visible during their active session. Accessing tasks of other users is restricted.
 </b>
-
-<br>
+<br><br>
 <img src="first.gif">
+<br><br>
 <img src="second.gif">
+<br><br>
 <img src="third.gif">
+<br><br>
+<img src="forth.gif">
+<br><br>
+<img src="fifth.gif">
+<br><br>
