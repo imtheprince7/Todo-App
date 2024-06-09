@@ -1,6 +1,6 @@
 # Task Management Application
 An advanced C++ application developed with Qt and MySQL for task organization and tracking. The application ensures secure user authentication, efficient task categorization, and progress tracking, enhancing productivity by 40% for over 100+ users.
-<br><br>
+<br>
 # Features
 → Secure User Authentication  <br>
 → Add Task  <br>
